@@ -19,21 +19,21 @@ The application follows a **Microservices-inspired layered architecture**, ensur
 ### Architecture Diagram
 ```mermaid
 graph TD
-    User[User Client] -->|HTTPS/JSON| Frontend[React + Vite UI]
-    Frontend -->|REST API| API_Gateway[Node.js/Express API Gateway]
+    User["User Client"] -->|HTTPS/JSON| Frontend["React + Vite UI"]
+    Frontend -->|REST API| API_Gateway["Node.js/Express API Gateway"]
     
     subgraph Backend Services
-        API_Gateway -->|Auth Middleware| Auth[Auth Service (JWT)]
-        API_Gateway -->|Chat Routing| ChatService[Chat Controller]
-        ChatService -->|Context+Prompt| AI_Engine[Gemini Integration Layer]
+        API_Gateway -->|Auth Middleware| Auth["Auth Service (JWT)"]
+        API_Gateway -->|Chat Routing| ChatService["Chat Controller"]
+        ChatService -->|Context+Prompt| AI_Engine["Gemini Integration Layer"]
     end
     
     subgraph External AI
-        AI_Engine -->|API Request| GoogleGemini[Google Gemini API]
+        AI_Engine -->|API Request| GoogleGemini["Google Gemini API"]
         GoogleGemini -->|Response| AI_Engine
     end
     
     subgraph Data Layer
-        ChatService -->|Store Logs| DB[(MongoDB Atlas)]
+        ChatService -->|Store Logs| DB[("MongoDB Atlas")]
         Auth -->|Read/Write User| DB
     end
